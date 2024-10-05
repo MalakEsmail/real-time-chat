@@ -29,7 +29,7 @@ class _AuthScreenState extends State<AuthScreen> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const ChatScreen(),
+                    builder: (BuildContext context) =>  ChatScreen(),
                   ));
             }
             if (state is SignUpSuccessfullyState) {
@@ -37,7 +37,7 @@ class _AuthScreenState extends State<AuthScreen> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const ChatScreen(),
+                    builder: (BuildContext context) =>  ChatScreen(),
                   ));
             }
             if (state is LoginErrorState) {

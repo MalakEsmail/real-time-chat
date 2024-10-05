@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -7,6 +8,10 @@ import 'package:realtimechat/src/authentication/data/data_source/auth_remote_dat
 import 'package:realtimechat/src/authentication/data/repo/auth_repo_impl.dart';
 import 'package:realtimechat/src/authentication/presentation/auth_bloc/auth_bloc.dart';
 import 'package:realtimechat/src/authentication/presentation/auth_screen.dart';
+import 'package:realtimechat/src/chat/data/data_source/chat_remote_data_source.dart';
+import 'package:realtimechat/src/chat/data/repo/chat_repo_impl.dart';
+import 'package:realtimechat/src/chat/presentation/bloc/chat_bloc.dart';
+import 'package:realtimechat/src/chat/presentation/chat_screen.dart';
 import 'package:realtimechat/src/core/network/network_info.dart';
 
 class ChatApp extends StatelessWidget {
@@ -28,6 +33,14 @@ class ChatApp extends StatelessWidget {
                     networkInfo: NetworkInfoImpl(internetConnectionChecker: InternetConnectionChecker()),
                     authRemoteDataSource: AuthRemoteDataSourceImpl(),
                     authLocalDataSource: AuthLocalDataSourceImpl(const FlutterSecureStorage()))),
+          ),
+          BlocProvider<ChatBloc>(
+            create: (BuildContext context) => ChatBloc(
+              chatRepo: ChatRepoImpl(
+                networkInfo: NetworkInfoImpl(internetConnectionChecker: InternetConnectionChecker()),
+                chatRemoteDataSource: ChatRemoteDataSourceImpl(),
+              ),
+            ),
           ),
         ],
         child: const AuthScreen(),
