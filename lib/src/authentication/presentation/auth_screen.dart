@@ -26,18 +26,16 @@ class _AuthScreenState extends State<AuthScreen> {
           listener: (context, state) {
             if (state is LoginSuccessfullyState) {
               showToast(context: context, msg: 'Logged in Successfully !');
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) =>  ChatScreen(),
-                  ));
+              Navigator.of(context).push(MaterialPageRoute<void>(
+                builder: (BuildContext context) => ChatScreen(),
+              ));
             }
             if (state is SignUpSuccessfullyState) {
               showToast(context: context, msg: 'Signed up Successfully !');
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) =>  ChatScreen(),
+                    builder: (BuildContext context) => ChatScreen(),
                   ));
             }
             if (state is LoginErrorState) {

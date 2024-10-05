@@ -26,4 +26,20 @@ class ChatRepoImpl extends ChatRepo {
       return Left(NetworkFailure(message: 'connection failed ! , try connect to Internet !'));
     }
   }
+
+  @override
+  Stream<Either<Failure, List<DocumentSnapshot>>> fetchMessages() async* {
+    if (await networkInfo.isConnected) {
+      try {
+        List<DocumentSnapshot> messagesList =await chatRemoteDataSource.fetchMessages();
+        yield Right(messagesList);
+      } on FirebaseException catch (e) {
+        yield Left(FirebaseFailure(
+          message: e.message ?? "Some thing error",
+        ));
+      }
+    } else {
+      yield Left(NetworkFailure(message: 'connection failed ! , try connect to Internet !'));
+    }
+  }
 }

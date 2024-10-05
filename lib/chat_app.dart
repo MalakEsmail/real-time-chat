@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -11,7 +10,6 @@ import 'package:realtimechat/src/authentication/presentation/auth_screen.dart';
 import 'package:realtimechat/src/chat/data/data_source/chat_remote_data_source.dart';
 import 'package:realtimechat/src/chat/data/repo/chat_repo_impl.dart';
 import 'package:realtimechat/src/chat/presentation/bloc/chat_bloc.dart';
-import 'package:realtimechat/src/chat/presentation/chat_screen.dart';
 import 'package:realtimechat/src/core/network/network_info.dart';
 
 class ChatApp extends StatelessWidget {
@@ -19,31 +17,31 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Real Time Chat',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthBloc>(
-            create: (BuildContext context) => AuthBloc(
-                authRepo: AuthRepoImpl(
-                    networkInfo: NetworkInfoImpl(internetConnectionChecker: InternetConnectionChecker()),
-                    authRemoteDataSource: AuthRemoteDataSourceImpl(),
-                    authLocalDataSource: AuthLocalDataSourceImpl(const FlutterSecureStorage()))),
-          ),
-          BlocProvider<ChatBloc>(
-            create: (BuildContext context) => ChatBloc(
-              chatRepo: ChatRepoImpl(
-                networkInfo: NetworkInfoImpl(internetConnectionChecker: InternetConnectionChecker()),
-                chatRemoteDataSource: ChatRemoteDataSourceImpl(),
-              ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (BuildContext context) => AuthBloc(
+              authRepo: AuthRepoImpl(
+                  networkInfo: NetworkInfoImpl(internetConnectionChecker: InternetConnectionChecker()),
+                  authRemoteDataSource: AuthRemoteDataSourceImpl(),
+                  authLocalDataSource: AuthLocalDataSourceImpl(const FlutterSecureStorage()))),
+        ),
+        BlocProvider<ChatBloc>(
+          create: (BuildContext context) => ChatBloc(
+            chatRepo: ChatRepoImpl(
+              networkInfo: NetworkInfoImpl(internetConnectionChecker: InternetConnectionChecker()),
+              chatRemoteDataSource: ChatRemoteDataSourceImpl(),
             ),
           ),
-        ],
-        child: const AuthScreen(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Real Time Chat',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const AuthScreen(),
       ),
     );
   }

@@ -9,5 +9,8 @@ class SendMessageEvent extends ChatEvent {
   String message;
 
   SendMessageEvent({required this.message});
+}
 
+class FetchMessagesEvent extends ChatEvent {
+  FetchMessagesEvent();
 }

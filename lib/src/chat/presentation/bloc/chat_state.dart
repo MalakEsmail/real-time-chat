@@ -17,3 +17,17 @@ final class ErrorSendMessage extends ChatState {
 
   ErrorSendMessage({required this.errorMessage});
 }
+
+final class LoadingFetchMessages extends ChatState {}
+
+final class LoadedFetchMessages extends ChatState {
+  final List<DocumentSnapshot> messages;
+
+  LoadedFetchMessages({required this.messages});
+}
+
+final class ErrorFetchMessages extends ChatState {
+  final String errorMessage;
+
+  ErrorFetchMessages({required this.errorMessage});
+}
