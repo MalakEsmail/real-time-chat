@@ -21,7 +21,7 @@ final class ErrorSendMessage extends ChatState {
 final class LoadingFetchMessages extends ChatState {}
 
 final class LoadedFetchMessages extends ChatState {
-  final List<DocumentSnapshot> messages;
+  final List<MessageModel> messages;
 
   LoadedFetchMessages({required this.messages});
 }

@@ -32,7 +32,7 @@ class ChatApp extends StatelessWidget {
               networkInfo: NetworkInfoImpl(internetConnectionChecker: InternetConnectionChecker()),
               chatRemoteDataSource: ChatRemoteDataSourceImpl(),
             ),
-          ),
+          )..add(FetchMessagesEvent()),
         ),
       ],
       child: MaterialApp(
