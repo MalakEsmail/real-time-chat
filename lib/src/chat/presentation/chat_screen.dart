@@ -104,7 +104,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   icon: const Icon(Icons.send),
                   onPressed: () {
                     if (_controller.text.isNotEmpty) {
-                      chatBloc.add(SendMessageEvent(message: _controller.text));
+                      BlocProvider.of<ChatBloc>(context).add(SendMessageEvent(message: _controller.text));
                       _controller.clear();
                     }
                   },
